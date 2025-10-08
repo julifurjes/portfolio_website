@@ -11,7 +11,7 @@ export default function LandingSection({ progress }: LandingSectionProps) {
         Juli Furjes
       </div>
       <div className="subtitle" style={{ opacity }}>
-        Behavioural Technology Designer · UX Research · Frontend · AI
+        Cognitive Scientist · Tech-to-Human Designer
       </div>
       <div className="scroll-indicator" style={{ opacity: progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 4) }}>
         SCROLL TO EXPLORE

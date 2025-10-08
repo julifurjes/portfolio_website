@@ -1,8 +1,8 @@
 import '@/styles/globals.css';
 
 export const metadata = {
-  title: 'Juli Furjes - Portfolio',
-  description: 'Cognitive Scientist · UX Research · Frontend · AI',
+  title: 'Juli Furjes – Cognitive Scientist | UX Research | AI & Frontend Development',
+  description: 'Cognitive scientist with expertise in UX research, data science, and AI-driven design. Experienced in developing human-centered digital systems through frontend development, behavioral analysis, and cognitive insights.',
 };
 
 export default function RootLayout({

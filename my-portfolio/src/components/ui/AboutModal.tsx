@@ -49,6 +49,8 @@ export default function AboutModal({
         </button>
 
         <div className="content">
+          <h2 className="section-title">My Story</h2>
+
           <div className="profile-section">
             <div className="image-wrapper">
               <Image
@@ -61,7 +63,6 @@ export default function AboutModal({
             </div>
 
             <div className="story">
-              <h2 className="section-title">My Story</h2>
               <p className="story-text">
                 I'm a Cognitive Scientist who discovered my passion at the intersection of human psychology, creative problem-solving, and technology. My academic background in Cognitive Science has given me deep insights into how people think and behave, grounding my work in principles like Gestalt theory and behavioral psychology. Technically, I've spent four years mastering Python for everything from algorithms to full-stack and data analysis, plus a year diving into JavaScript and TypeScript. But what really drives me is fighting for inclusivity and rethinking systems to make them more accessible. Whether that's gamifying coding classes for middle schoolers who initially didn't want to be there, or building user interfaces that truly understand human behavior. I believe the best digital experiences happen when empathy meets technical precision, and a little creativity makes it all come alive.
               </p>
@@ -170,15 +171,23 @@ export default function AboutModal({
           max-height: 90vh;
         }
 
+        .section-title {
+          font-size: 1.4rem;
+          font-weight: 600;
+          color: #fff;
+          margin: 0 0 20px 0;
+        }
+
         .profile-section {
           display: flex;
-          gap: 32px;
+          gap: 24px;
           margin-bottom: 32px;
-          align-items: flex-start;
+          align-items: center;
         }
 
         .image-wrapper {
           flex-shrink: 0;
+          align-self: center;
         }
 
         .image-wrapper :global(.profile-image) {
@@ -191,13 +200,8 @@ export default function AboutModal({
 
         .story {
           flex: 1;
-        }
-
-        .section-title {
-          font-size: 1.4rem;
-          font-weight: 600;
-          color: #fff;
-          margin: 0 0 12px 0;
+          display: flex;
+          align-items: center;
         }
 
         .story-text {

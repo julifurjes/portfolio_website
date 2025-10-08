@@ -22,7 +22,7 @@ export default function ConstellationItem({
 }: ConstellationItemProps) {
   const baseStyle: React.CSSProperties = {
     ...position,
-    opacity: opacity === 0 ? 0 : Math.max(opacity * 0.95, 0.85),
+    opacity: 1,
     transition: 'opacity 0.5s ease',
     pointerEvents: opacity === 0 ? 'none' : 'auto',
   };
@@ -72,14 +72,14 @@ export default function ConstellationItem({
           height: 100%;
           object-fit: contain;
           transition: all .4s ease;
-          filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+          filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
         }
 
         .constellation:hover .constellation-image-wrapper :global(.constellation-image) {
           filter:
+            brightness(1.4)
             drop-shadow(0 0 12px rgba(125, 249, 255, 0.6))
-            drop-shadow(0 0 24px rgba(125, 249, 255, 0.4))
-            brightness(1.2);
+            drop-shadow(0 0 24px rgba(125, 249, 255, 0.4));
         }
 
         .constellation-info {
@@ -94,20 +94,21 @@ export default function ConstellationItem({
         }
 
         .constellation-label {
-          color: rgba(255, 255, 255, 0.95);
+          color: #ffffff;
+          opacity: 1;
           font-size: 0.75rem;
           letter-spacing: .05rem;
           white-space: nowrap;
           transition: all .3s ease;
           font-weight: 500;
           text-transform: none;
-          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+          text-shadow: none;
         }
 
         .constellation:hover .constellation-label {
-          color: rgba(125, 249, 255, 1);
+          color: #ffffff;
           letter-spacing: .08rem;
-          text-shadow: 0 0 12px rgba(125, 249, 255, 0.5);
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
         }
 
         .category-badges {
@@ -122,8 +123,8 @@ export default function ConstellationItem({
           padding: 2px 10px;
           border-radius: 3px;
           background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          color: rgba(255, 255, 255, 0.75);
+          border: 1px solid rgba(255, 255, 255, 0.35);
+          color: rgba(255, 255, 255, 0.9);
           font-weight: 400;
           white-space: nowrap;
           transition: all 0.3s ease;
@@ -132,9 +133,9 @@ export default function ConstellationItem({
         }
 
         .constellation:hover .category-badge {
-          border-color: rgba(139, 146, 255, 0.6);
-          color: rgba(139, 146, 255, 0.95);
-          background: rgba(139, 146, 255, 0.08);
+          border-color: rgba(139, 146, 255, 0.7);
+          color: rgba(255, 255, 255, 1);
+          background: rgba(139, 146, 255, 0.15);
         }
       `}</style>
     </div>
