@@ -57,8 +57,8 @@ export default function CharacterPoses({ progress, onClick }: CharacterPosesProp
           bottom: 0;
           left: 50%;
           transform: translateX(-50%);
-          width: min(400px, 60vw);
-          height: min(600px, 85vh);
+          height: 33vh; /* 1/3 of the screen height */
+          aspect-ratio: 3 / 5; /* adjust to your figure’s ratio (e.g., width:height = 3:5) */
           z-index: 15;
           pointer-events: auto;
           transition: transform 0.3s ease;

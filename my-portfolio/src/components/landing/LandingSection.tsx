@@ -22,10 +22,40 @@ export default function LandingSection({ progress }: LandingSectionProps) {
         #landing { background: linear-gradient(to bottom, #1a1f3a 0%, #0a0e27 100%); overflow: hidden; }
         .name-title { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); font-size: clamp(2.2rem, 6vw, 4.2rem); font-weight: 300; letter-spacing: .3rem; color: #e8e6f0; text-align: center; z-index: 10; transition: opacity .6s ease; }
         .subtitle { position: absolute; top: calc(20% + 4.8rem); left: 50%; transform: translateX(-50%); font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 300; letter-spacing: .2rem; color: #a8a6b8; text-align: center; z-index: 10; transition: opacity .6s ease; }
-        .scroll-indicator { position: absolute; top: 50%; left: 50%; transform: translateX(-50%); color: #a8a6b8; font-size: .85rem; letter-spacing: .08rem; animation: float 2s ease-in-out infinite; z-index: 5; pointer-events: none; }
-        .scroll-indicator::after { content: '↓'; display: block; text-align: center; font-size: 1.3rem; margin-top: .4rem; }
-        @keyframes float { 0%,100%{ transform: translateX(-50%) translateY(0);} 50%{ transform: translateX(-50%) translateY(-8px);} }
-        @media (max-width: 768px) { .scroll-indicator { top: 45%; } }
+        .scroll-indicator {
+          position: absolute;
+          top: calc(100vh - 40vh); /* positions it ~10vh above the figure if figure ≈ 33vh tall */
+          left: 50%;
+          transform: translateX(-50%);
+          color: #a8a6b8;
+          font-size: 0.85rem;
+          letter-spacing: 0.08rem;
+          animation: float 2s ease-in-out infinite;
+          z-index: 5;
+          pointer-events: none;
+          transition: top 0.3s ease;
+        }
+
+        .scroll-indicator::after {
+          content: '↓';
+          display: block;
+          text-align: center;
+          font-size: 1.3rem;
+          margin-top: 0.4rem;
+        }
+
+        @media (max-width: 1024px) {
+          .scroll-indicator { top: calc(100vh - 38vh); }
+        }
+
+        @media (max-width: 768px) {
+          .scroll-indicator { top: calc(100vh - 36vh); font-size: 0.8rem; }
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(-8px); }
+        }
       `}</style>
     </section>
   );
