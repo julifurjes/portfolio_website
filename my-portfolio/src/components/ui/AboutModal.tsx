@@ -55,7 +55,7 @@ export default function AboutModal({
                 src="/me.jpg"
                 alt="Profile"
                 width={150}
-                height={150}
+                height={200}
                 className="profile-image"
               />
             </div>
@@ -70,7 +70,6 @@ export default function AboutModal({
 
           <div className="skills-grid">
             <div className="skill-category">
-              <h3 className="category-title">Tech Stack & Skills</h3>
               <div className="skills-columns">
                 <div className="skill-column">
                   <h4 className="skill-heading">Design & Research Tools</h4>
@@ -184,7 +183,7 @@ export default function AboutModal({
 
         .image-wrapper :global(.profile-image) {
           width: 150px;
-          height: 150px;
+          height: 200px;
           border-radius: 12px;
           object-fit: cover;
           border: 2px solid rgba(255, 255, 255, 0.1);
@@ -213,13 +212,6 @@ export default function AboutModal({
         }
 
         .skill-category {
-        }
-
-        .category-title {
-          font-size: 1.4rem;
-          font-weight: 600;
-          color: #fff;
-          margin: 0 0 20px 0;
         }
 
         .skills-columns {

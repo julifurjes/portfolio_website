@@ -6,6 +6,7 @@ export const PROJECTS: Project[] = [
     id: "depression",
     title: "Depression Trajectory Prediction",
     category: "Behavioral AI Research",
+    categories: ["AI Development", "Data Science"],
     description: "Mixed-effects models + GEE + Random Forest to forecast depression trajectory surges. Built complete data pipelines and interactive evaluation dashboards for clinical research teams.",
     details: [
       "Developed predictive models using longitudinal patient data",
@@ -20,6 +21,7 @@ export const PROJECTS: Project[] = [
     id: "university",
     title: "University Integration System",
     category: "Service Design",
+    categories: ["UX"],
     description: "End-to-end service design and process blueprint that became a permanent institutional role supporting international student integration and cross-cultural adaptation.",
     details: [
       "Conducted ethnographic research with 50+ international students",
@@ -34,6 +36,7 @@ export const PROJECTS: Project[] = [
     id: "ux_assistant",
     title: "Intelligent UX Assistant",
     category: "AI-Powered Tools",
+    categories: ["AI Development", "UX"],
     description: "LLM-powered tool for synthesizing research sessions with automatic theme tagging and journey map insights generation from qualitative data.",
     details: [
       "Built NLP pipeline for qualitative research analysis",
@@ -48,6 +51,7 @@ export const PROJECTS: Project[] = [
     id: "cocreators",
     title: "Co-Creators Platform",
     category: "Collaborative Design",
+    categories: ["Frontend", "UX"],
     description: "Discovery-to-delivery platform with ideation workshops. Converted user insights into reusable UI patterns and facilitation assets for collaborative design.",
     details: [
       "Facilitated 15+ co-creation workshops with diverse stakeholders",
@@ -68,27 +72,27 @@ export const CONSTELLATION_CONFIG: Record<string, {
   size?: string;
 }> = {
   depression: {
-    position: { top: "20%", left: "15%" },
+    position: { top: "15%", left: "8%" },
     image: "/illustrations/constellation1.png",
-    label: "DEPRESSION PREDICTOR",
+    label: "Depression Predictor",
     size: "250px"
   },
   university: {
-    position: { top: "20%", right: "15%" },
+    position: { top: "25%", right: "18%" },
     image: "/illustrations/constellation2.png",
-    label: "INTEGRATION SYSTEM",
+    label: "Integration System",
     size: "250px"
   },
   ux_assistant: {
-    position: { top: "60%", left: "15%" },
+    position: { top: "55%", left: "22%" },
     image: "/illustrations/constellation3.png",
-    label: "UX ASSISTANT",
+    label: "UX Assistant",
     size: "250px"
   },
   cocreators: {
-    position: { top: "60%", right: "15%" },
+    position: { top: "65%", right: "10%" },
     image: "/illustrations/constellation4.png",
-    label: "CO-CREATORS",
+    label: "Co-Creators Platform",
     size: "250px"
   }
 };

@@ -42,19 +42,75 @@ export default function CharacterPoses({ progress, onClick }: CharacterPosesProp
         </div>
       </div>
       
-      {progress > 0.6 && (
+      {progress > 0.55 && (
         <div className="click-hint">
-          <span>Click to learn about me</span>
+          <span className="hint-text">Click to read about me</span>
+          <svg className="hint-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 16L10 4M10 16L6 12M10 16L14 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       )}
 
       <style jsx>{`
-        .observer-container { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(400px, 60vw); height: min(600px, 85vh); z-index: 15; pointer-events: auto; }
+        .observer-container {
+          position: fixed;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: min(400px, 60vw);
+          height: min(600px, 85vh);
+          z-index: 15;
+          pointer-events: auto;
+          transition: transform 0.3s ease;
+        }
+        .observer-container:hover {
+          transform: translateX(-50%) translateY(-8px);
+        }
         .poses-container { position: relative; width: 100%; height: 100%; }
         .pose { position: absolute; inset: 0; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .click-hint { position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: rgba(232, 230, 240, 0.7); white-space: nowrap; animation: subtlePulse 3s ease-in-out infinite; pointer-events: none; letter-spacing: 0.05rem; text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); }
-        @keyframes subtlePulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.9; } }
-        @media (max-width: 768px) { .observer-container{ width: 70vw; height: 70vh; } }
+
+        .click-hint {
+          position: absolute;
+          bottom: calc(100% + 10px);
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+          pointer-events: none;
+          z-index: 20;
+          animation: floatHint 2.5s ease-in-out infinite;
+        }
+
+        .hint-text {
+          font-size: 0.75rem;
+          color: rgba(255, 255, 255, 0.85);
+          white-space: nowrap;
+          letter-spacing: 0.01rem;
+          font-weight: 400;
+        }
+
+        .hint-arrow {
+          color: rgba(255, 255, 255, 0.7);
+          animation: bounceArrow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes floatHint {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 1; }
+        }
+
+        @keyframes bounceArrow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(4px); }
+        }
+
+        @media (max-width: 768px) {
+          .observer-container { width: 70vw; height: 70vh; }
+          .hint-text { font-size: 0.7rem; }
+          .click-hint { bottom: calc(100% + 10px); }
+        }
       `}</style>
     </div>
   );

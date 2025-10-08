@@ -3,10 +3,13 @@ export interface ProjectLink {
   href: string;
 }
 
+export type ProjectCategory = 'AI Development' | 'Data Science' | 'Frontend' | 'UX';
+
 export interface Project {
   id: string;
   title: string;
   category: string;
+  categories: ProjectCategory[]; // For filtering
   description: string;
   details: string[];
   tags: string[];
