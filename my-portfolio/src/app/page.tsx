@@ -1,15 +1,12 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-// Single-file demo you can paste into app/page.tsx in a new Next.js (App Router) project.
-// Tailwind NOT required; styles are styled-jsx below. Works on Vercel out of the box.
+import Image from "next/image";
 
 export default function Page() {
   const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState<null | string>(null);
   const starsRef = useRef<HTMLDivElement>(null);
 
-  // Simple projects registry — replace with your real projects later
   const PROJECTS: Record<string, { title: string; blurb: string; links?: { label: string; href: string }[] }[]> = useMemo(
     () => ({
       neural: [
@@ -51,7 +48,6 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    // generate twinkling stars once
     const container = starsRef.current;
     if (!container) return;
     if (container.dataset.seeded) return;
@@ -71,16 +67,22 @@ export default function Page() {
   return (
     <main>
       <section id="landing" className="section">
-        <div className="name-title">Juli Furjes</div>
-        <div className="subtitle">Behavioural Technology Designer · UX Research · Frontend · AI</div>
-        <div className="scroll-indicator">SCROLL TO EXPLORE</div>
+        <div className="name-title" style={{ opacity: progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 3) }}>
+          Juli Furjes
+        </div>
+        <div className="subtitle" style={{ opacity: progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 3) }}>
+          Behavioural Technology Designer · UX Research · Frontend · AI
+        </div>
+        <div className="scroll-indicator" style={{ opacity: progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 4) }}>
+          SCROLL TO EXPLORE
+        </div>
       </section>
 
       <section id="projects" className="section" aria-hidden />
 
-      {/* Fixed stage */}
+      {/* Fixed character with crossfading poses */}
       <div className="observer-container" aria-hidden>
-        <BackFigure progress={progress} />
+        <CharacterPoses progress={progress} />
       </div>
 
       <div className="sky-background" style={{ opacity: progress > 0.5 ? Math.min((progress - 0.5) / 0.3, 1) : 0 }} />
@@ -102,7 +104,7 @@ export default function Page() {
         .scroll-indicator::after { content: '↓'; display: block; text-align: center; font-size: 1.5rem; margin-top: .5rem; }
         @keyframes float { 0%,100%{ transform: translateX(-50%) translateY(0);} 50%{ transform: translateX(-50%) translateY(-10px);} }
 
-        .observer-container { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(360px, 52vw); height: min(520px, 75vh); z-index: 5; pointer-events: none; }
+        .observer-container { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(400px, 60vw); height: min(600px, 85vh); z-index: 5; pointer-events: none; }
         .sky-background { position: fixed; inset: 0; background: radial-gradient(ellipse at top, #1a237e 0%, #0a0e27 50%); transition: opacity 1s ease; z-index: 1; }
         .stars { position: fixed; inset: 0; transition: opacity 1s ease; z-index: 2; }
         .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
@@ -116,9 +118,66 @@ export default function Page() {
         .constellation-label { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); color: #e8e6f0; font-size: .9rem; letter-spacing: .1rem; white-space: nowrap; opacity: 0; transition: opacity .3s ease; text-shadow: 0 0 10px rgba(0,0,0,.8); }
         .constellation:hover .constellation-label { opacity: 1; }
 
-        @media (max-width: 768px) { .observer-container{ width: 62vw; height: 56vh; } }
+        @media (max-width: 768px) { .observer-container{ width: 70vw; height: 70vh; } }
       `}</style>
     </main>
+  );
+}
+
+/**
+ * Crossfades between the 3 PNG stages based on scroll progress
+ */
+function CharacterPoses({ progress }: { progress: number }) {
+  // Stage 1 (standing): visible from 0 to 0.35
+  // Stage 2 (lifting): visible from 0.2 to 0.55
+  // Stage 3 (looking): visible from 0.45+
+  
+  const opacity1 = progress < 0.2 ? 1 : progress < 0.35 ? 1 - (progress - 0.2) / 0.15 : 0;
+  const opacity2 = progress < 0.2 ? 0 : progress < 0.35 ? (progress - 0.2) / 0.15 : progress < 0.55 ? 1 : 1 - (progress - 0.55) / 0.15;
+  const opacity3 = progress < 0.45 ? 0 : Math.min((progress - 0.45) / 0.15, 1);
+
+  return (
+    <div className="poses-container">
+      <div className="pose" style={{ opacity: opacity1 }}>
+        <Image
+          src="/illustrations/binoculars1.png"
+          alt="Standing"
+          fill
+          style={{ objectFit: "contain", objectPosition: "bottom center" }}
+          priority
+        />
+      </div>
+      <div className="pose" style={{ opacity: opacity2 }}>
+        <Image
+          src="/illustrations/binoculars2.png"
+          alt="Lifting binoculars"
+          fill
+          style={{ objectFit: "contain", objectPosition: "bottom center" }}
+          priority
+        />
+      </div>
+      <div className="pose" style={{ opacity: opacity3 }}>
+        <Image
+          src="/illustrations/binoculars3.png"
+          alt="Looking through binoculars"
+          fill
+          style={{ objectFit: "contain", objectPosition: "bottom center" }}
+          priority
+        />
+      </div>
+      <style jsx>{`
+        .poses-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+        .pose {
+          position: absolute;
+          inset: 0;
+          transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      `}</style>
+    </div>
   );
 }
 
@@ -231,16 +290,19 @@ function Drawer({ openKey, onClose, items = [] as any[] }: { openKey: string | n
         ))}
       </div>
       <style jsx>{`
-        .drawer { position: fixed; left: 0; right: 0; bottom: 0; background: rgba(10,14,39,.9); border-top: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(8px); padding: 20px 24px 32px; z-index: 50; transition: transform .55s cubic-bezier(.2,.9,.2,1); }
+        .drawer { position: fixed; left: 0; right: 0; bottom: 0; background: rgba(10,14,39,.95); border-top: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(12px); padding: 20px 24px 32px; z-index: 50; transition: transform .55s cubic-bezier(.2,.9,.2,1); max-height: 70vh; overflow-y: auto; }
         .drawer-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
         .drawer-title { font-size: 1rem; letter-spacing: .18rem; text-transform: uppercase; color: #cfd2ff; }
-        .close { appearance: none; border: 0; background: transparent; color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; opacity: .8; }
-        .drawer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
-        .card { border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 14px 16px; background: rgba(255,255,255,.02); }
-        .card h3 { font-weight: 500; margin-bottom: 6px; font-size: 1.05rem; }
-        .card p { color: #c8c7d3; font-size: .95rem; line-height: 1.35; }
-        .links { margin-top: 10px; display: flex; gap: 12px; flex-wrap: wrap; }
-        .links a { color: #cfd2ff; text-decoration: none; border-bottom: 1px dashed rgba(207,210,255,.5); }
+        .close { appearance: none; border: 0; background: transparent; color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; opacity: .8; transition: opacity .2s; }
+        .close:hover { opacity: 1; }
+        .drawer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .card { border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 16px 18px; background: rgba(255,255,255,.02); transition: all .3s ease; }
+        .card:hover { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.15); }
+        .card h3 { font-weight: 500; margin-bottom: 8px; font-size: 1.1rem; }
+        .card p { color: #c8c7d3; font-size: .95rem; line-height: 1.45; }
+        .links { margin-top: 12px; display: flex; gap: 14px; flex-wrap: wrap; }
+        .links a { color: #cfd2ff; text-decoration: none; border-bottom: 1px dashed rgba(207,210,255,.5); transition: border-color .2s; }
+        .links a:hover { border-bottom-color: rgba(207,210,255,.9); }
       `}</style>
     </div>
   );
@@ -256,76 +318,4 @@ function label(key: string) {
     mobile: "Mobile Meteor — Responsive Design",
   };
   return labels[key] ?? key;
-}
-
-/**
- * Back-facing detailed character with long red hair holding binoculars.
- * Pure CSS/SVG – lightweight and stylable.
- */
-function BackFigure({ progress }: { progress: number }) {
-  // lift arms + show binoculars between 0.2–0.5 like your original
-  const armP = progress > 0.2 ? Math.min((progress - 0.2) / 0.3, 1) : 0;
-  return (
-    <div className="figure">
-      <svg viewBox="0 0 220 340" className="svg">
-        {/* Background rock/ledge */}
-        <defs>
-          <linearGradient id="coat" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#4a5568" />
-            <stop offset="100%" stopColor="#2d3748" />
-          </linearGradient>
-          <linearGradient id="hairGrad" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="#d34b33" />
-            <stop offset="50%" stopColor="#b8352a" />
-            <stop offset="100%" stopColor="#7a241e" />
-          </linearGradient>
-          <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2" />
-          </filter>
-        </defs>
-
-        {/* Body / coat (back view) */}
-        <path d="M90,110 q20,-8 40,0 q20,8 26,34 v110 q0,18 -20,28 q-51,24 -92,0 q-20,-12 -20,-28 v-110 q6,-26 26,-34 q20,-8 40,0 z" fill="url(#coat)" />
-
-        {/* Hair mass (long, wavy, back) */}
-        <g className="hair" transform="translate(0,0)">
-          <path d="M60,60 q50,-30 100,10 q24,16 20,60 q-2,24 -14,44 q-10,16 -10,34 q0,16 -14,30 q-22,22 -62,18 q-34,-4 -50,-28 q-10,-16 -6,-36 q6,-26 -4,-52 q-12,-30 6,-52 q12,-14 34,-28 z" fill="url(#hairGrad)" />
-          {/* strands */}
-          {[-6, 0, 6].map((dx, i) => (
-            <path
-              key={i}
-              d={`M80,78 q30,12 ${60 + dx},40`}
-              fill="none"
-              stroke="#f06a4c"
-              strokeOpacity=".25"
-              strokeWidth="2"
-            />
-          ))}
-        </g>
-
-        {/* Head silhouette (back) */}
-        <ellipse cx="110" cy="90" rx="24" ry="28" fill="#d4a574" filter="url(#soft)" />
-
-        {/* Raised arms (animated by transform) */}
-        <g className="arm left" style={{ transform: `translate(0px, ${-armP * 18}px) rotate(${-20 - armP * 20}deg)`, transformOrigin: "80px 150px" }}>
-          <path d="M70,150 q-16,6 -16,24 v32 q0,14 12,18 q14,6 24,-2 l8,-6 v-52 z" fill="#d4a574" />
-          <rect x="80" y="170" width="22" height="12" rx="6" fill="#4a5568" />
-        </g>
-        <g className="arm right" style={{ transform: `translate(0px, ${-armP * 18}px) rotate(${20 + armP * 20}deg)`, transformOrigin: "140px 150px" }}>
-          <path d="M150,150 q16,6 16,24 v32 q0,14 -12,18 q-14,6 -24,-2 l-8,-6 v-52 z" fill="#d4a574" />
-          <rect x="120" y="170" width="22" height="12" rx="6" fill="#4a5568" />
-        </g>
-
-        {/* Binoculars (fade in with armP) */}
-        <g opacity={armP}>
-          <rect x="92" y="110" width="16" height="20" rx="4" fill="#2d3748" stroke="#5f6b84" />
-          <rect x="112" y="110" width="16" height="20" rx="4" fill="#2d3748" stroke="#5f6b84" />
-          <rect x="106" y="118" width="8" height="4" fill="#5f6b84" />
-        </g>
-      </svg>
-      <style jsx>{`
-        .svg { width: 100%; height: 100%; display: block; }
-      `}</style>
-    </div>
-  );
 }
