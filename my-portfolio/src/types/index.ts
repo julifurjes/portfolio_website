@@ -5,17 +5,27 @@ export interface ProjectLink {
 
 export type ProjectCategory = 'AI Development' | 'Data Science' | 'Frontend' | 'UX';
 
+export interface ProjectSection {
+  title: string;
+  content: string;
+  images?: string[]; // Array of image paths to display in this section
+}
+
 export interface Project {
   id: string;
   title: string;
   category: string;
   categories: ProjectCategory[]; // For filtering
-  description: string;
-  details: string[];
+  description: string; // TLDR description
+  details: string[]; // TLDR key achievements
   tags: string[];
   link: string;
   github?: string;
   demo?: string;
+  // New detailed sections - can be flexible for different projects
+  sections?: {
+    [key: string]: ProjectSection;
+  };
 }
 
 export interface FeaturedProject {

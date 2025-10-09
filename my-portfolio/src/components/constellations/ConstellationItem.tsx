@@ -22,7 +22,7 @@ export default function ConstellationItem({
 }: ConstellationItemProps) {
   const baseStyle: React.CSSProperties = {
     ...position,
-    opacity: 1,
+    opacity: opacity,
     transition: 'opacity 0.5s ease',
     pointerEvents: opacity === 0 ? 'none' : 'auto',
   };
