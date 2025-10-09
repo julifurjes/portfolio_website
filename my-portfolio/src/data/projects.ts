@@ -19,7 +19,7 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/julifurjes/depression-analysis",
     sections: {
       context: {
-        title: "Project Context",
+        title: "Research Context",
         content: "During my internship at NOVA Medical Faculty in Lisbon, I contributed to a PhD research project analyzing depression trajectories using longitudinal data. The primary challenge was working with a highly imbalanced dataset while maintaining model accuracy and interpretability for clinical researchers.\n\nMy role spanned the complete research pipeline: identifying the best-fitting statistical models through extensive trial and error, conducting detailed data analyses, creating visualizations to uncover patterns, and documenting methodologies for reproducibility. A key aspect was translating complex data science concepts for my psychologist supervisor, strengthening my ability to communicate technical work to non-technical audiences."
       },
       approach: {
@@ -53,7 +53,7 @@ export const PROJECTS: Project[] = [
         content: "Menopause represents a critical neurocognitive and psychosocial transition affecting up to two-thirds of women through subjective cognitive difficulties—'brain fog,' forgetfulness, and memory challenges. Approximately 70% experience verbal and working memory issues that impact daily functioning and work performance.\n\nDespite recognition that hormonal changes (decreased estradiol, increased FSH) influence prefrontal and temporal lobe function, research has traditionally studied hormonal, cognitive, emotional, and social dimensions separately. My MSc thesis addressed this gap by analyzing how these factors interact across the menopausal transition using longitudinal data from the Study of Women's Health Across the Nation (SWAN)."
       },
       approach: {
-        title: "Methodological Approach",
+        title: "Technical Approach",
         content: "I analyzed data from 2,309 women (aged 42–52) contributing 24,081 observations across multiple time points. After excluding hormone-therapy users and participants with insufficient cognitive assessments, I applied rigorous data preparation: stratified K-Nearest Neighbours imputation for missing data, log and square-root transformations for skewed variables, and inverse-frequency weighting to address stage imbalances.\n\nCognitive function was measured via the East Boston Memory Test (EBMT) immediate and delayed recall, averaged into a single score. Emotional difficulties, social support, and symptom severity (hot flashes, night sweats, cold sweats, irritability, mood fluctuations) were assessed through validated self-report measures.\n\nI fitted linear mixed-effects models via REML, controlling for menopausal stage, visit number, age, and interview language, with random intercepts and slopes to capture individual trajectories. This approach allowed me to model within-person changes over time while accounting for substantial individual variability."
       },
       findings: {
