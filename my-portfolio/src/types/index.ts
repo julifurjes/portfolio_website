@@ -22,6 +22,7 @@ export interface Project {
   link: string;
   github?: string;
   demo?: string;
+  slideshow?: string[]; // Array of image paths for slideshow
   // New detailed sections - can be flexible for different projects
   sections?: {
     [key: string]: ProjectSection;

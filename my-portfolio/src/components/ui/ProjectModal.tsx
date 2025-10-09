@@ -1,5 +1,6 @@
 import { Project } from '@/types';
 import Image from 'next/image';
+import Slideshow from './Slideshow';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -76,6 +77,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
             </div>
           </div>
+
+          {/* Slideshow */}
+          {project.slideshow && project.slideshow.length > 0 && (
+            <div className="slideshow-section">
+              <Slideshow folderPath={project.slideshow[0]} />
+            </div>
+          )}
 
           {/* Detailed Sections */}
           {project.sections && Object.keys(project.sections).length > 0 && (
@@ -192,6 +200,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         /* TLDR Section */
         .tldr-section {
           margin-bottom: 48px;
+        }
+
+        /* Slideshow Section */
+        .slideshow-section {
+          margin-bottom: 64px;
         }
 
         .modal-header {

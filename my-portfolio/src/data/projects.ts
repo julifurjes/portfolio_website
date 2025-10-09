@@ -47,6 +47,7 @@ export const PROJECTS: Project[] = [
     tags: ["Python", "Linear Mixed-Effects Models", "Longitudinal Analysis", "K-NN Imputation", "Women's Health Research"],
     link: "#",
     github: "https://github.com/julifurjes/msc_thesis",
+    slideshow: ["/projects/menopause"],
     sections: {
       context: {
         title: "Research Context",
@@ -77,6 +78,7 @@ export const PROJECTS: Project[] = [
     tags: ["RAG", "NLP", "FastAPI", "OpenAI", "Prompt Engineering", "React", "TypeScript", "Python"],
     link: "#",
     github: "https://github.com/julifurjes/ai_research_platform",
+    slideshow: ["/projects/lumen"],
     sections: {
       information: {
         title: "Information",
@@ -111,6 +113,7 @@ export const PROJECTS: Project[] = [
     tags: ["React (TSX)", "UX/UI Design", "Frontend Development", "Storytelling Design", "Component Architecture"],
     link: "#",
     demo: "https://co-creators.net/",
+    slideshow: ["/projects/cocreators"],
     sections: {
       information: {
         title: "Information",
