@@ -6,9 +6,10 @@ interface CharacterPosesProps {
 }
 
 export default function CharacterPoses({ progress, onClick }: CharacterPosesProps) {
-  const opacity1 = progress < 0.2 ? 1 : progress < 0.35 ? 1 - (progress - 0.2) / 0.15 : 0;
-  const opacity2 = progress < 0.2 ? 0 : progress < 0.35 ? (progress - 0.2) / 0.15 : progress < 0.45 ? 1 : progress < 0.55 ? 1 - (progress - 0.45) / 0.1 : 0;
-  const opacity3 = progress < 0.45 ? 0 : Math.min((progress - 0.45) / 0.15, 1);
+  // Smoother, more gradual transitions with longer overlap periods
+  const opacity1 = progress < 0.2 ? 1 : progress < 0.4 ? 1 - (progress - 0.2) / 0.2 : 0;
+  const opacity2 = progress < 0.15 ? 0 : progress < 0.35 ? (progress - 0.15) / 0.2 : progress < 0.5 ? 1 : progress < 0.65 ? 1 - (progress - 0.5) / 0.15 : 0;
+  const opacity3 = progress < 0.5 ? 0 : Math.min((progress - 0.5) / 0.2, 1);
 
   return (
     <div className="observer-container" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
@@ -57,8 +58,8 @@ export default function CharacterPoses({ progress, onClick }: CharacterPosesProp
           bottom: 0;
           left: 50%;
           transform: translateX(-50%);
-          height: 33vh; /* 1/3 of the screen height */
-          aspect-ratio: 3 / 5; /* adjust to your figure’s ratio (e.g., width:height = 3:5) */
+          height: 32vh; /* Slightly reduced to match other poses */
+          aspect-ratio: 3 / 5; /* adjust to your figure's ratio (e.g., width:height = 3:5) */
           z-index: 15;
           pointer-events: auto;
           transition: transform 0.3s ease;
@@ -67,7 +68,7 @@ export default function CharacterPoses({ progress, onClick }: CharacterPosesProp
           transform: translateX(-50%) translateY(-8px);
         }
         .poses-container { position: relative; width: 100%; height: 100%; }
-        .pose { position: absolute; inset: 0; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .pose { position: absolute; inset: 0; transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
 
         .click-hint {
           position: absolute;

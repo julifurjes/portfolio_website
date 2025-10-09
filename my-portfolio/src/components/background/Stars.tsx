@@ -37,8 +37,8 @@ export default function Stars({ progress, children }: StarsProps) {
       <style jsx>{`
         .stars { position: fixed; inset: 0; transition: opacity 1s ease; z-index: 2; pointer-events: none; }
         .constellations-container { position: absolute; top: 0; left: 0; right: 0; height: 50vh; pointer-events: auto; transition: opacity 0.5s ease; }
-        :global(.star) { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        :global(.star) { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 4s ease-in-out infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
       `}</style>
     </div>
   );

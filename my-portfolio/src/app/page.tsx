@@ -2,7 +2,6 @@
 import { useEffect, useState, useMemo } from "react";
 import LandingSection from "@/components/landing/LandingSection";
 import CharacterPoses from "@/components/character/CharacterPoses";
-import SkyBackground from "@/components/background/SkyBackground";
 import Stars from "@/components/background/Stars";
 import Constellations from "@/components/constellations/Constellations";
 import ProjectCards from "@/components/projects/ProjectCards";
@@ -64,8 +63,6 @@ export default function Page() {
         progress={progress}
         onClick={() => setAboutOpen(true)}
       />
-
-      <SkyBackground progress={progress} />
 
       <Stars progress={progress}>
         <Constellations

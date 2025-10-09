@@ -3,14 +3,32 @@ interface LandingSectionProps {
 }
 
 export default function LandingSection({ progress }: LandingSectionProps) {
-  const opacity = progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 3);
+  const textOpacity = progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 3);
+  const backgroundIntensity = Math.min(progress * 1.5, 1);
 
   return (
     <section id="landing" className="section">
-      <div className="name-title" style={{ opacity }}>
+      <div className="fixed-background">
+        <div className="gradient-overlay" style={{ opacity: backgroundIntensity }} />
+        <div className="stars-container">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="star"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                opacity: Math.random() * 0.3 + 0.1,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="name-title" style={{ opacity: textOpacity }}>
         Juli Furjes
       </div>
-      <div className="subtitle" style={{ opacity }}>
+      <div className="subtitle" style={{ opacity: textOpacity }}>
         Cognitive Scientist · Tech-to-Human Designer
       </div>
       <div className="scroll-indicator" style={{ opacity: progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 4) }}>
@@ -18,8 +36,55 @@ export default function LandingSection({ progress }: LandingSectionProps) {
       </div>
 
       <style jsx>{`
-        .section { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
-        #landing { background: linear-gradient(to bottom, #1a1f3a 0%, #0a0e27 100%); overflow: hidden; }
+        .section {
+          min-height: 100vh;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        #landing {
+          overflow: hidden;
+          position: relative;
+        }
+
+        .fixed-background {
+          position: fixed;
+          inset: 0;
+          background: linear-gradient(135deg, #1a1f3a 0%, #151a35 25%, #0f1228 50%, #0a0e27 100%);
+          z-index: 0;
+        }
+
+        .gradient-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(ellipse at top, #1a237e 0%, #0f1228 40%, transparent 70%);
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+
+        .stars-container {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .star {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          background: white;
+          border-radius: 50%;
+          box-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+          animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.1; }
+          50% { opacity: 0.4; }
+        }
         .name-title { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); font-size: clamp(2.2rem, 6vw, 4.2rem); font-weight: 300; letter-spacing: .3rem; color: #e8e6f0; text-align: center; z-index: 10; transition: opacity .6s ease; }
         .subtitle { position: absolute; top: calc(20% + 4.8rem); left: 50%; transform: translateX(-50%); font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 300; letter-spacing: .2rem; color: #a8a6b8; text-align: center; z-index: 10; transition: opacity .6s ease; }
         .scroll-indicator {
