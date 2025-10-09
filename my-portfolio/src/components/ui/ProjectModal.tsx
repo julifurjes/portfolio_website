@@ -80,8 +80,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Detailed Sections */}
           {project.sections && Object.keys(project.sections).length > 0 && (
             <div className="detailed-sections">
-              <div className="section-divider" />
-
               {Object.entries(project.sections).map(([key, section]) => (
                 <section key={key} className="content-section">
                   <div className="section-grid">
@@ -134,7 +132,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           max-height: 92vh;
           background: linear-gradient(135deg, rgba(15, 20, 50, 0.98) 0%, rgba(10, 14, 39, 0.99) 100%);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 24px;
+          border-radius: 0;
           box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
           z-index: 101;
           overflow: hidden;
@@ -193,8 +191,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         /* TLDR Section */
         .tldr-section {
-          margin-bottom: 64px;
-          padding-bottom: 48px;
+          margin-bottom: 48px;
         }
 
         .modal-header {
@@ -227,6 +224,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           line-height: 1.7;
           margin-bottom: 48px;
           max-width: 900px;
+          text-align: justify;
         }
 
         .details-grid {
@@ -330,22 +328,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         /* Detailed Sections */
         .detailed-sections {
-          margin-top: 64px;
-        }
-
-        .section-divider {
-          height: 1px;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.1) 50%,
-            transparent
-          );
-          margin: 64px 0;
+          margin-top: 0;
         }
 
         .content-section {
-          margin-bottom: 80px;
+          margin-bottom: 64px;
         }
 
         .content-section:last-child {
@@ -378,6 +365,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           font-size: 1.05rem;
           line-height: 1.8;
           margin: 0 0 24px 0;
+          text-align: justify;
         }
 
         .section-content p:last-child {
