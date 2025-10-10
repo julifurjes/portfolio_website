@@ -93,9 +93,20 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   <div className="section-grid">
                     <h2 className="section-title">{section.title}</h2>
                     <div className="section-content">
-                      {section.content.split('\n\n').map((paragraph, idx) => (
-                        <p key={idx}>{paragraph}</p>
-                      ))}
+                      {section.content.split('\n\n').map((paragraph, idx) => {
+                        // Check if paragraph starts with a subsection title (ends with colon on first line)
+                        const colonMatch = paragraph.match(/^([^:]+):\s*(.+)/s);
+                        if (colonMatch) {
+                          const [, subsectionTitle, subsectionContent] = colonMatch;
+                          return (
+                            <div key={idx} className="subsection">
+                              <h3 className="subsection-title">{subsectionTitle}</h3>
+                              <p>{subsectionContent}</p>
+                            </div>
+                          );
+                        }
+                        return <p key={idx}>{paragraph}</p>;
+                      })}
                       {section.images && (
                         <div className="section-images">
                           {section.images.map((img, idx) => (
@@ -383,6 +394,26 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         .section-content p:last-child {
           margin-bottom: 0;
+        }
+
+        .subsection {
+          margin-bottom: 24px;
+        }
+
+        .subsection:last-child {
+          margin-bottom: 0;
+        }
+
+        .subsection-title {
+          font-size: 1.05rem;
+          font-weight: 600;
+          color: #fff;
+          margin: 0 0 8px 0;
+          letter-spacing: -0.01em;
+        }
+
+        .subsection p {
+          margin-top: 0;
         }
 
         .section-images {
