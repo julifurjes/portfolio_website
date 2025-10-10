@@ -1,3 +1,7 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
 interface LandingSectionProps {
   progress: number;
 }
@@ -6,20 +10,33 @@ export default function LandingSection({ progress }: LandingSectionProps) {
   const textOpacity = progress < 0.2 ? 1 : Math.max(0, 1 - (progress - 0.2) * 3);
   const backgroundIntensity = Math.min(progress * 1.5, 1);
 
+  const [stars, setStars] = useState<Array<{ left: number; top: number; delay: number; opacity: number }>>([]);
+
+  useEffect(() => {
+    setStars(
+      [...Array(50)].map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        delay: Math.random() * 3,
+        opacity: Math.random() * 0.3 + 0.1,
+      }))
+    );
+  }, []);
+
   return (
     <section id="landing" className="section">
       <div className="fixed-background">
         <div className="gradient-overlay" style={{ opacity: backgroundIntensity }} />
         <div className="stars-container">
-          {[...Array(50)].map((_, i) => (
+          {stars.map((star, i) => (
             <div
               key={i}
               className="star"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                opacity: Math.random() * 0.3 + 0.1,
+                left: `${star.left}%`,
+                top: `${star.top}%`,
+                animationDelay: `${star.delay}s`,
+                opacity: star.opacity,
               }}
             />
           ))}
