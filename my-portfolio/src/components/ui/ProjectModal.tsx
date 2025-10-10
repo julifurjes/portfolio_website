@@ -95,7 +95,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     <div className="section-content">
                       {section.content.split('\n\n').map((paragraph, idx) => {
                         // Check if paragraph starts with a subsection title (ends with colon on first line)
-                        const colonMatch = paragraph.match(/^([^:]+):\s*(.+)/s);
+                        const colonMatch = paragraph.match(/^([^:]+):\s*([\s\S]+)/);
                         if (colonMatch) {
                           const [, subsectionTitle, subsectionContent] = colonMatch;
                           return (
