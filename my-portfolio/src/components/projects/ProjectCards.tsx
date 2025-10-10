@@ -2,9 +2,10 @@ import { FEATURED_PROJECTS } from '@/data/projects';
 
 interface ProjectCardsProps {
   progress: number;
+  onProjectClick: (projectId: string) => void;
 }
 
-export default function ProjectCards({ progress }: ProjectCardsProps) {
+export default function ProjectCards({ progress, onProjectClick }: ProjectCardsProps) {
   const cardOpacity = progress > 0.85 ? Math.min((progress - 0.85) / 0.15, 1) : 0;
 
   return (
@@ -12,9 +13,9 @@ export default function ProjectCards({ progress }: ProjectCardsProps) {
       <h2 className="projects-heading">Featured Work</h2>
       <div className="project-grid">
         {FEATURED_PROJECTS.map((project, index) => (
-          <a 
-            key={index} 
-            href={project.link} 
+          <div
+            key={index}
+            onClick={() => onProjectClick(project.id)}
             className="project-card"
             style={{ transitionDelay: `${index * 0.1}s` }}
           >
@@ -27,7 +28,7 @@ export default function ProjectCards({ progress }: ProjectCardsProps) {
               ))}
             </div>
             <div className="project-arrow">→</div>
-          </a>
+          </div>
         ))}
       </div>
       

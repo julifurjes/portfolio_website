@@ -139,14 +139,14 @@ export default function LandingSection({ progress }: LandingSectionProps) {
         }
 
         @media (max-width: 768px) {
-          .name-title { top: 15%; letter-spacing: .15rem; }
-          .subtitle { top: calc(15% + 4rem); letter-spacing: .1rem; }
-          .scroll-indicator { top: calc(100vh - 85vh); font-size: 0.8rem; }
+          .name-title { top: 20%; letter-spacing: .15rem; }
+          .subtitle { top: calc(20% + 4rem); letter-spacing: .1rem; }
+          .scroll-indicator { top: calc(100vh - 35vh); font-size: 0.8rem; }
 
           .desktop-hint {
             display: block;
             position: fixed;
-            bottom: 1rem;
+            top: 1rem;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(139, 146, 255, 0.12);
@@ -160,14 +160,14 @@ export default function LandingSection({ progress }: LandingSectionProps) {
             max-width: 85%;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.5s ease 1s both;
+            animation: fadeInDown 0.5s ease 1s both;
           }
         }
 
-        @keyframes fadeInUp {
+        @keyframes fadeInDown {
           from {
             opacity: 0;
-            transform: translateX(-50%) translateY(10px);
+            transform: translateX(-50%) translateY(-10px);
           }
           to {
             opacity: 1;

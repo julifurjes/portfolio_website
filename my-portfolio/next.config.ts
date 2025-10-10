@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    // Disable symlinks to fix Windows/OneDrive issues
+    turbo: {
+      resolveAlias: {}
+    }
+  }
 };
 
 export default nextConfig;

@@ -18,6 +18,31 @@ export default function Page() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<ProjectCategory[]>([]);
 
+  // Initialize project from URL on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('project');
+    if (projectId && PROJECTS.find(p => p.id === projectId)) {
+      setSelectedProjectId(projectId);
+    }
+  }, []);
+
+  // Listen for browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const projectId = params.get('project');
+      if (projectId && PROJECTS.find(p => p.id === projectId)) {
+        setSelectedProjectId(projectId);
+      } else {
+        setSelectedProjectId(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const selectedProject = selectedProjectId
     ? PROJECTS.find(p => p.id === selectedProjectId) || null
     : null;
@@ -33,6 +58,19 @@ export default function Page() {
       )
       .map(p => p.id);
   }, [selectedCategories]);
+
+  // Handle opening project with URL update
+  const handleOpenProject = (projectId: string) => {
+    setSelectedProjectId(projectId);
+    const newUrl = `${window.location.pathname}?project=${projectId}`;
+    window.history.pushState({ projectId }, '', newUrl);
+  };
+
+  // Handle closing project with URL cleanup
+  const handleCloseProject = () => {
+    setSelectedProjectId(null);
+    window.history.pushState({}, '', window.location.pathname);
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -56,7 +94,7 @@ export default function Page() {
       )}
 
       <section id="projects" className="section">
-        <ProjectCards progress={progress} />
+        <ProjectCards progress={progress} onProjectClick={handleOpenProject} />
       </section>
 
       <CharacterPoses
@@ -67,14 +105,14 @@ export default function Page() {
       <Stars progress={progress}>
         <Constellations
           progress={progress}
-          onOpen={setSelectedProjectId}
+          onOpen={handleOpenProject}
           visibleProjectIds={visibleProjectIds}
         />
       </Stars>
 
       <ProjectModal
         project={selectedProject}
-        onClose={() => setSelectedProjectId(null)}
+        onClose={handleCloseProject}
       />
 
       <AboutModal

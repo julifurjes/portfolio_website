@@ -165,6 +165,7 @@ export const CONSTELLATION_CONFIG: Record<string, {
 };
 
 export const FEATURED_PROJECTS: FeaturedProject[] = PROJECTS.slice(0, 4).map(p => ({
+  id: p.id,
   title: p.title,
   category: p.category,
   description: p.description,

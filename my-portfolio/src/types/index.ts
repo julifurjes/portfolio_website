@@ -30,6 +30,7 @@ export interface Project {
 }
 
 export interface FeaturedProject {
+  id: string;
   title: string;
   category: string;
   description: string;
