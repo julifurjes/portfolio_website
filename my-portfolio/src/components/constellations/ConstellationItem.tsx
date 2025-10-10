@@ -137,6 +137,12 @@ export default function ConstellationItem({
           color: rgba(255, 255, 255, 1);
           background: rgba(139, 146, 255, 0.15);
         }
+
+        @media (max-width: 768px) {
+          .constellation {
+            display: none;
+          }
+        }
       `}</style>
     </div>
   );

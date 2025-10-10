@@ -126,6 +126,12 @@ export default function ProjectFilter({ selectedCategories, onFilterChange }: Pr
             padding: 8px 10px;
             top: 10px;
             max-width: 92%;
+            flex-direction: column;
+            gap: 8px;
+          }
+
+          .filter-label {
+            font-size: 0.7rem;
           }
 
           .filter-buttons {

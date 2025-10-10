@@ -52,6 +52,10 @@ export default function LandingSection({ progress }: LandingSectionProps) {
         SCROLL TO EXPLORE
       </div>
 
+      <div className="desktop-hint">
+        Best viewed on desktop for the full experience
+      </div>
+
       <style jsx>{`
         .section {
           min-height: 100vh;
@@ -102,8 +106,8 @@ export default function LandingSection({ progress }: LandingSectionProps) {
           0%, 100% { opacity: 0.1; }
           50% { opacity: 0.4; }
         }
-        .name-title { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); font-size: clamp(2.2rem, 6vw, 4.2rem); font-weight: 300; letter-spacing: .3rem; color: #e8e6f0; text-align: center; z-index: 10; transition: opacity .6s ease; }
-        .subtitle { position: absolute; top: calc(20% + 4.8rem); left: 50%; transform: translateX(-50%); font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 300; letter-spacing: .2rem; color: #a8a6b8; text-align: center; z-index: 10; transition: opacity .6s ease; }
+        .name-title { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); font-size: clamp(2.2rem, 6vw, 4.2rem); font-weight: 300; letter-spacing: .3rem; color: #e8e6f0; text-align: center; z-index: 10; transition: opacity .6s ease; width: 90%; max-width: 800px; }
+        .subtitle { position: absolute; top: calc(20% + 4.8rem); left: 50%; transform: translateX(-50%); font-size: clamp(1rem, 2.2vw, 1.2rem); font-weight: 300; letter-spacing: .2rem; color: #a8a6b8; text-align: center; z-index: 10; transition: opacity .6s ease; width: 90%; max-width: 600px; }
         .scroll-indicator {
           position: absolute;
           top: calc(100vh - 40vh); /* positions it ~10vh above the figure if figure ≈ 33vh tall */
@@ -127,11 +131,48 @@ export default function LandingSection({ progress }: LandingSectionProps) {
         }
 
         @media (max-width: 1024px) {
-          .scroll-indicator { top: calc(100vh - 38vh); }
+          .scroll-indicator { top: calc(100vh - 80vh); }
+        }
+
+        .desktop-hint {
+          display: none;
         }
 
         @media (max-width: 768px) {
-          .scroll-indicator { top: calc(100vh - 36vh); font-size: 0.8rem; }
+          .name-title { top: 15%; letter-spacing: .15rem; }
+          .subtitle { top: calc(15% + 4rem); letter-spacing: .1rem; }
+          .scroll-indicator { top: calc(100vh - 85vh); font-size: 0.8rem; }
+
+          .desktop-hint {
+            display: block;
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(139, 146, 255, 0.12);
+            border: 1px solid rgba(139, 146, 255, 0.25);
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: center;
+            z-index: 60;
+            max-width: 85%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.5s ease 1s both;
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+          }
         }
 
         @keyframes float {
