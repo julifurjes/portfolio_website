@@ -8,8 +8,8 @@ interface CharacterPosesProps {
 export default function CharacterPoses({ progress, onClick }: CharacterPosesProps) {
   // Smoother, more gradual transitions with longer overlap periods
   const opacity1 = progress < 0.2 ? 1 : progress < 0.4 ? 1 - (progress - 0.2) / 0.2 : 0;
-  const opacity2 = progress < 0.15 ? 0 : progress < 0.35 ? (progress - 0.15) / 0.2 : progress < 0.5 ? 1 : progress < 0.65 ? 1 - (progress - 0.5) / 0.15 : 0;
-  const opacity3 = progress < 0.5 ? 0 : Math.min((progress - 0.5) / 0.2, 1);
+  const opacity2 = progress < 0.15 ? 0 : progress < 0.35 ? (progress - 0.15) / 0.2 : progress < 0.4 ? 1 : progress < 0.65 ? 1 - (progress - 0.4) / 0.15 : 0;
+  const opacity3 = progress < 0.5 ? 0 : Math.min((progress - 0.4) / 0.1, 1);
 
   return (
     <div className="observer-container" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>

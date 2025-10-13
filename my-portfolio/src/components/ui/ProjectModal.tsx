@@ -69,9 +69,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     </a>
                   )}
                   {project.demo && (
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                      {project.id === 'cocreators' ? 'See Website ↗' : 'Live Demo ↗'}
-                    </a>
+                    <>
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                        {project.id === 'cocreators' ? 'See Website ↗' : 'Live Demo ↗'}
+                      </a>
+                      {project.id === 'cocreators' && (
+                        <p className="demo-disclaimer">
+                          Note: The client has made modifications to the website since my original work.
+                        </p>
+                      )}
+                    </>
                   )}
                 </div>
               </div>
@@ -343,6 +350,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         .btn-secondary {
           background: rgba(255, 255, 255, 0.06);
           border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .demo-disclaimer {
+          margin-top: 12px;
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.55);
+          font-style: italic;
+          line-height: 1.4;
         }
 
         .btn-secondary:hover {

@@ -24,11 +24,19 @@ export default function ConstellationItem({
     ...position,
     opacity: opacity,
     transition: 'opacity 0.5s ease',
-    pointerEvents: opacity === 0 ? 'none' : 'auto',
+    pointerEvents: opacity < 0.1 ? 'none' : 'auto',
   };
 
   return (
-    <div className="constellation" style={baseStyle} onClick={onClick}>
+    <div
+      className="constellation"
+      style={baseStyle}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onClick();
+      }}
+    >
       <div className="constellation-image-wrapper">
         <Image
           src={image}

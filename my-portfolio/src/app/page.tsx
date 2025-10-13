@@ -18,30 +18,30 @@ export default function Page() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<ProjectCategory[]>([]);
 
-  // Initialize project from URL on mount
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const projectId = params.get('project');
-    if (projectId && PROJECTS.find(p => p.id === projectId)) {
-      setSelectedProjectId(projectId);
-    }
-  }, []);
+  // // Initialize project from URL on mount
+  // useEffect(() => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   const projectId = params.get('project');
+  //   if (projectId && PROJECTS.find(p => p.id === projectId)) {
+  //     setSelectedProjectId(projectId);
+  //   }
+  // }, []);
 
-  // Listen for browser back/forward navigation
-  useEffect(() => {
-    const handlePopState = () => {
-      const params = new URLSearchParams(window.location.search);
-      const projectId = params.get('project');
-      if (projectId && PROJECTS.find(p => p.id === projectId)) {
-        setSelectedProjectId(projectId);
-      } else {
-        setSelectedProjectId(null);
-      }
-    };
+  // // Listen for browser back/forward navigation
+  // useEffect(() => {
+  //   const handlePopState = () => {
+  //     const params = new URLSearchParams(window.location.search);
+  //     const projectId = params.get('project');
+  //     if (projectId && PROJECTS.find(p => p.id === projectId)) {
+  //       setSelectedProjectId(projectId);
+  //     } else {
+  //       setSelectedProjectId(null);
+  //     }
+  //   };
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  //   window.addEventListener('popstate', handlePopState);
+  //   return () => window.removeEventListener('popstate', handlePopState);
+  // }, []);
 
   const selectedProject = selectedProjectId
     ? PROJECTS.find(p => p.id === selectedProjectId) || null

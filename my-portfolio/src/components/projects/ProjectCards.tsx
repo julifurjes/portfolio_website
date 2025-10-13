@@ -13,29 +13,33 @@ export default function ProjectCards({ progress, onProjectClick }: ProjectCardsP
       <h2 className="projects-heading">Featured Work</h2>
       <div className="project-grid">
         {FEATURED_PROJECTS.map((project, index) => (
-          <div
-            key={index}
-            onClick={() => onProjectClick(project.id)}
-            className="project-card"
-            style={{ transitionDelay: `${index * 0.1}s` }}
-          >
-            <div className="project-category">{project.category}</div>
-            <h3 className="project-title">{project.title}</h3>
-            <p className="project-description">{project.description}</p>
-            <div className="project-tags">
-              {project.tags.map((tag, i) => (
-                <span key={i} className="tag">{tag}</span>
-              ))}
+            <div
+              key={project.id}
+              onClick={() => onProjectClick(project.id)}
+              className="project-card"
+              style={{ transitionDelay: `${index * 0.1}s` }}
+            >
+              <div className="project-category">{project.category}</div>
+              <h3 className="project-title">{project.title}</h3>
+              <p className="project-description">{project.description}</p>
+              <div className="project-tags">
+                {project.tags.map((tag, i) => (
+                  <span key={i} className="tag">{tag}</span>
+                ))}
+              </div>
+              <div className="project-arrow">→</div>
             </div>
-            <div className="project-arrow">→</div>
-          </div>
-        ))}
+          ))}
       </div>
       
       <style jsx>{`
-        .project-cards-container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; transition: opacity 1s ease; position: relative; z-index: 10; }
-        .projects-heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: 0.2rem; text-align: center; color: #e8e6f0; margin-bottom: 3rem; }
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .project-cards-container {
+          max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;
+          transition: opacity 1s ease; position: relative; z-index: 10;
+          min-height: 150vh; /* Provide scrollable space on desktop */
+        }
+        .projects-heading { font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: 0.2rem; text-align: center; color: #e8e6f0; margin-bottom: 3rem; display: none; }
+        .project-grid { display: none; /* Hide cards on desktop */ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .project-card {
           position: relative; background: rgba(26, 35, 126, 0.15); border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 16px; padding: 2rem; text-decoration: none; color: inherit;
@@ -52,9 +56,9 @@ export default function ProjectCards({ progress, onProjectClick }: ProjectCardsP
         .project-arrow { position: absolute; bottom: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: #a8a6f0; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; }
         .project-card:hover .project-arrow { opacity: 1; transform: translateX(0); }
         @media (max-width: 768px) {
-          .project-cards-container { padding: 3rem 1.5rem; padding-bottom: 4rem; }
-          .project-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-          .projects-heading { letter-spacing: 0.1rem; }
+          .project-cards-container { padding: 3rem 1.5rem; padding-bottom: 4rem; min-height: auto; }
+          .projects-heading { display: block; letter-spacing: 0.1rem; }
+          .project-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         }
       `}</style>
     </div>
