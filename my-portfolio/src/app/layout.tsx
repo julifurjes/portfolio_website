@@ -2,7 +2,7 @@ import '@/styles/globals.css';
 import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
-  title: 'Juli Furjes – Cognitive Scientist & Human-Centered Technologist',
+  title: 'Juli Furjes – Tech-to-Human Designer',
   description: 'Designing at the intersection of cognition, UX, and AI. Combining research, data science, and frontend development to create intelligent, inclusive digital experiences.',
   icons: {
     icon: '/favicon.ico',
