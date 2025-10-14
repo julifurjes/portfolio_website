@@ -17,6 +17,7 @@ export interface Project {
   category: string;
   categories: ProjectCategory[]; // For filtering
   description: string; // TLDR description
+  mobileDescription?: string; // Short description for mobile cards
   details: string[]; // TLDR key achievements
   tags: string[];
   link: string;
@@ -34,6 +35,7 @@ export interface FeaturedProject {
   title: string;
   category: string;
   description: string;
+  mobileDescription?: string;
   tags: string[];
   link: string;
 }

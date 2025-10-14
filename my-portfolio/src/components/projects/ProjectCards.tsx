@@ -1,18 +1,36 @@
 import { FEATURED_PROJECTS } from '@/data/projects';
+import { useState, useEffect, useMemo } from 'react';
 
 interface ProjectCardsProps {
   progress: number;
   onProjectClick: (projectId: string) => void;
+  visibleProjectIds: string[];
 }
 
-export default function ProjectCards({ progress, onProjectClick }: ProjectCardsProps) {
-  const cardOpacity = progress > 0.85 ? Math.min((progress - 0.85) / 0.15, 1) : 0;
+export default function ProjectCards({ progress, onProjectClick, visibleProjectIds }: ProjectCardsProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Desktop: fade in after progress > 0.85
+  // Mobile: always visible (opacity 1) for continuous scrolling
+  const cardOpacity = isMobile ? 1 : (progress > 0.85 ? Math.min((progress - 0.85) / 0.15, 1) : 0);
+
+  // Filter projects based on visible IDs
+  const filteredProjects = useMemo(() => {
+    return FEATURED_PROJECTS.filter(project => visibleProjectIds.includes(project.id));
+  }, [visibleProjectIds]);
 
   return (
     <div className="project-cards-container" style={{ opacity: cardOpacity }}>
       <h2 className="projects-heading">Featured Work</h2>
       <div className="project-grid">
-        {FEATURED_PROJECTS.map((project, index) => (
+        {filteredProjects.map((project, index) => (
             <div
               key={project.id}
               onClick={() => onProjectClick(project.id)}
@@ -21,7 +39,9 @@ export default function ProjectCards({ progress, onProjectClick }: ProjectCardsP
             >
               <div className="project-category">{project.category}</div>
               <h3 className="project-title">{project.title}</h3>
-              <p className="project-description">{project.description}</p>
+              <p className="project-description">
+                {isMobile && project.mobileDescription ? project.mobileDescription : project.description}
+              </p>
               <div className="project-tags">
                 {project.tags.map((tag, i) => (
                   <span key={i} className="tag">{tag}</span>
@@ -56,8 +76,11 @@ export default function ProjectCards({ progress, onProjectClick }: ProjectCardsP
         .project-arrow { position: absolute; bottom: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: #a8a6f0; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; }
         .project-card:hover .project-arrow { opacity: 1; transform: translateX(0); }
         @media (max-width: 768px) {
-          .project-cards-container { padding: 3rem 1.5rem; padding-bottom: 4rem; min-height: auto; }
-          .projects-heading { display: block; letter-spacing: 0.1rem; }
+          .project-cards-container {
+            padding: 2rem 1.5rem; padding-top: 160px; padding-bottom: 4rem; min-height: auto;
+            transition: none; /* Remove fade transition on mobile for continuous scrolling */
+          }
+          .projects-heading { display: block; letter-spacing: 0.1rem; margin-bottom: 2rem; }
           .project-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         }
       `}</style>

@@ -8,6 +8,7 @@ export const PROJECTS: Project[] = [
     category: "Data Science Research Internship",
     categories: ["Data Science"],
     description: "Statistical modeling and machine learning for longitudinal mental health data. Supported a PhD research project on depression trajectories through statistical modeling and machine learning. Identified optimal models for highly imbalanced longitudinal data, created visualizations for pattern analysis, and documented methodologies for research transparency.",
+    mobileDescription: "Applied GEE and Random Forest to identify three distinct depression trajectory groups from highly imbalanced longitudinal data.",
     details: [
       "Applied GEE, mixed-effects models, and Random Forest to longitudinal depression data",
       "Handled severe class imbalance using SMOTE-Tomek and validation techniques",
@@ -38,6 +39,7 @@ export const PROJECTS: Project[] = [
     category: "MSc Thesis Research",
     categories: ["Data Science"],
     description: "Longitudinal analysis of hormonal, cognitive, emotional, and social factors. Analyzed the integrated impact of hormonal, cognitive, emotional, and social factors during menopause using longitudinal data from 2,309 women. Applied linear mixed-effects models to identify how vasomotor symptoms, social support, and menopausal stages affect cognitive function and emotional wellbeing.",
+    mobileDescription: "Mixed-effects modeling of 24K+ observations revealed surgical menopause as primary cognitive risk factor, with social support as key protective factor.",
     details: [
       "Analyzed 24,081 observations from SWAN longitudinal cohort using mixed-effects models",
       "Handled complex missing data with stratified K-NN imputation and inverse-frequency weighting",
@@ -69,6 +71,7 @@ export const PROJECTS: Project[] = [
     category: "Full-Stack AI Platform",
     categories: ["AI Development", "Frontend", "UX"],
     description: "Full-stack AI platform for analyzing academic papers through conversational AI. An intelligent tool that helps researchers understand academic papers faster through natural conversation. Built with RAG architecture and 5 specialized analysis modes.",
+    mobileDescription: "Full-stack RAG platform with 5 AI analysis modes for academic papers. FastAPI backend, React frontend, FAISS vector search.",
     details: [
       "Built a complete RAG pipeline that retrieves and generates answers from uploaded documents",
       "Created 5 different AI analysis modes (Quick Summary, Detailed Analysis, Critical Review, Methodology Focus, Standard)",
@@ -104,6 +107,7 @@ export const PROJECTS: Project[] = [
     category: "UX/UI Design & Frontend Development",
     categories: ["Frontend", "UX"],
     description: "Repositioning an AI startup through storytelling-driven design. Repositioned an AI startup as a purpose-driven innovation partner through a single-page website blending tech with nature, using malachite-themed minimalism and storytelling-driven UX.",
+    mobileDescription: "Single-page React site with progressive disclosure UX, repositioning AI startup through malachite-themed storytelling design.",
     details: [
       "Designed clear storytelling journey guiding users through Co-Creators' narrative",
       "Implemented progressive disclosure (expanders, hover states) to reduce cognitive load",
@@ -169,6 +173,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = PROJECTS.slice(0, 4).map(p =
   title: p.title,
   category: p.category,
   description: p.description,
+  mobileDescription: p.mobileDescription,
   tags: p.tags,
   link: p.link
 }));

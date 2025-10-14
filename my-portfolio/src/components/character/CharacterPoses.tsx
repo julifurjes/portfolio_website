@@ -108,9 +108,9 @@ export default function CharacterPoses({ progress, onClick }: CharacterPosesProp
         }
 
         @media (max-width: 768px) {
-          .observer-container { height: 28vh; }
-          .hint-text { font-size: 0.7rem; }
-          .click-hint { bottom: calc(100% + 5px); }
+          .observer-container {
+            display: none; /* Hide character on mobile */
+          }
         }
       `}</style>
     </div>

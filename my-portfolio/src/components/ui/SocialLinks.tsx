@@ -2,11 +2,11 @@ export default function SocialLinks() {
   return (
     <>
       <div className="social-links">
-        <a 
-          href="https://linkedin.com/in/julifurjes" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="social-link" 
+        <a
+          href="https://linkedin.com/in/julifurjes"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-link"
           aria-label="LinkedIn"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -15,11 +15,11 @@ export default function SocialLinks() {
             <circle cx="4" cy="4" r="2"></circle>
           </svg>
         </a>
-        <a 
-          href="https://github.com/julifurjes" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="social-link" 
+        <a
+          href="https://github.com/julifurjes"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-link"
           aria-label="GitHub"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -52,12 +52,13 @@ export default function SocialLinks() {
           transition: all 0.3s ease;
           backdrop-filter: blur(10px);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          text-decoration: none;
         }
 
         .social-link:hover {
           background: rgba(26, 35, 126, 0.9);
           border-color: rgba(255, 255, 255, 0.4);
-          transform: translateY(-3px) scale(1.05);
+          transform: translateY(-3px);
           box-shadow: 0 6px 20px rgba(100, 150, 255, 0.3);
         }
 
@@ -69,7 +70,7 @@ export default function SocialLinks() {
           transform: scale(1.1);
         }
 
-        @media (max-width: 768px) { 
+        @media (max-width: 768px) {
           .social-links {
             bottom: 1rem;
             right: 1rem;

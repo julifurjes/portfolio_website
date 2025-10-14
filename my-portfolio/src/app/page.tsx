@@ -90,11 +90,16 @@ export default function Page() {
         <ProjectFilter
           selectedCategories={selectedCategories}
           onFilterChange={setSelectedCategories}
+          onAboutClick={() => setAboutOpen(true)}
         />
       )}
 
       <section id="projects" className="section">
-        <ProjectCards progress={progress} onProjectClick={handleOpenProject} />
+        <ProjectCards
+          progress={progress}
+          onProjectClick={handleOpenProject}
+          visibleProjectIds={visibleProjectIds}
+        />
       </section>
 
       <CharacterPoses

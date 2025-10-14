@@ -52,7 +52,7 @@ export default function LandingSection({ progress }: LandingSectionProps) {
         SCROLL TO EXPLORE
       </div>
 
-      <div className="desktop-hint">
+      <div className="desktop-hint" style={{ opacity: Math.max(0, 1 - progress * 2) }}>
         Best viewed on desktop for the full experience
       </div>
 
@@ -161,6 +161,8 @@ export default function LandingSection({ progress }: LandingSectionProps) {
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             animation: fadeInDown 0.5s ease 1s both;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
           }
         }
 
