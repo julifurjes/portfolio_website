@@ -127,7 +127,7 @@ export default function ProjectFilter({ selectedCategories, onFilterChange, onAb
 
         .filter-container {
           position: fixed;
-          top: 24px;
+          top: 54px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 50;
